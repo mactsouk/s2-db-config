@@ -9,42 +9,55 @@ blocks:
   - name: Postgres
     task:
       jobs:
-      - name: Create user
+      - name: Postgres Create user
         commands:
           - sem-service start postgres
+          - psql -h postgres@localhost -c "CREATE USER developer WITH PASSWORD 'developer';"
+      - name: Postgres Create admin user
+        commands:
+          - sem-service start postgres
+          - psql -h postgres@localhost -c "CREATE USER developer WITH PASSWORD 'developer';"
+          - psql -h postgres@localhost -c "ALTER USER developer WITH SUPERUSER;"
 
   - name: MySQL
     task:
       jobs:
-      - name: Create user
+      - name: MySQL Create user
         commands:
           - sem-service start mysql
 
   - name: Redis
     task:
       jobs:
-      - name: Change password
+      - name: Redis Change password
         commands:
           - sem-service start redis
 
   - name: MongoDB
     task:
       jobs:
-      - name: Create user
+      - name: MongoDB Create user
         commands:
           - sem-service start mongodb
+          - sudo apt install mongodb-clients -y
+          - echo 'db.createUser( {user:"username", pwd:"password", roles:[], mechanisms:["SCRAM-SHA-1"]  } )' | mongo s2
+      - name: MongoDB Create admin user
+        commands:
+          - sem-service start mongodb
+          - sudo apt install mongodb-clients -y
+          - echo 'db.createUser({user:"username", pwd:"password", roles:[{role:"userAdminAnyDatabase",db:"admin"}], mechanisms:["SCRAM-SHA-1"]})' | mongo admin
 
   - name: Elasticsearch
     task:
       jobs:
-      - name: Create user
+      - name: Elasticsearch Create user
         commands:
           - sem-service start elasticsearch
 
   - name: Memcached
     task:
       jobs:
-      - name: Create user
+      - name: Memcached Create user
         commands:
           - sem-service start memcached
 
