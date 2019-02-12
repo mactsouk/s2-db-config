@@ -77,7 +77,9 @@ blocks:
   - name: Memcached
     task:
       jobs:
-      - name: Memcached Create user
+      - name: Memcached operating status
         commands:
           - sem-service start memcached
+          - sudo apt install libmemcached-tools -y
+          - memcstat --servers="127.0.0.1"
 
