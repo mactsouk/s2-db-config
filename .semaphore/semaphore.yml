@@ -25,6 +25,12 @@ blocks:
       - name: MySQL Create user
         commands:
           - sem-service start mysql
+          - mysql -h 127.0.0.1 -P 3306 -u root < rMySQL.sql
+
+      - name: MySQL Create admin user
+        commands:
+          - sem-service start mysql
+          - mysql -h 127.0.0.1 -P 3306 -u root < adminMySQL.sql
 
   - name: Redis
     task:
