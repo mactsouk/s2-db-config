@@ -12,12 +12,12 @@ blocks:
       - name: Postgres Create user
         commands:
           - sem-service start postgres
-          - psql -h postgres@127.0.0.1 -c "CREATE USER developer WITH PASSWORD 'developer';"
+          - psql -U postgres -h localhost -c "CREATE USER developer WITH PASSWORD 'developer';"
       - name: Postgres Create admin user
         commands:
           - sem-service start postgres
-          - psql -h postgres@127.0.0.1 -c "CREATE USER developer WITH PASSWORD 'developer';"
-          - psql -h postgres@127.0.0.1 -c "ALTER USER developer WITH SUPERUSER;"
+          - psql -U postgres -h localhost -c "CREATE USER developer WITH PASSWORD 'developer';"
+          - psql -U postgres -h localhost -c "ALTER USER developer WITH SUPERUSER;"
 
   - name: MySQL
     task:
