@@ -40,6 +40,9 @@ blocks:
       - name: Redis Change password
         commands:
           - sem-service start redis
+          - sudo apt install redis-tools -y
+          - redis-cli incr mycounter
+          - redis-cli incr mycounter
 
   - name: MongoDB
     task:
