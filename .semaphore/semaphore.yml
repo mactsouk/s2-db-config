@@ -37,7 +37,7 @@ blocks:
   - name: Redis
     task:
       jobs:
-      - name: Redis Change password
+      - name: Redis use database
         commands:
           - sem-service start redis
           - sudo apt install redis-tools -y
